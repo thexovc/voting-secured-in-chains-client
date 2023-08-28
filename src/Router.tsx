@@ -12,6 +12,8 @@ import Campaign from "./pages/Campaign/Campaign";
 import Profile from "./pages/Profile/Profile";
 import UserOutlet from "./pages/Outlet/UserOutlet";
 import Vote from "./pages/Vote/Vote";
+import Result from "./pages/Result/Result";
+import Settings from "./pages/Settings/Settings";
 
 function Router() {
   const router = createBrowserRouter(
@@ -26,6 +28,8 @@ function Router() {
             <Route path="campaign" element={<Campaign />} />
             <Route path="profile" element={<Profile />} />
             <Route path="vote" element={<Vote />} />
+            <Route path="result" element={<Result />} />
+            <Route path="setting" element={<Settings />} />
           </Route>
         </Route>
       </>
