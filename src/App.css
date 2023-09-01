@@ -1,0 +1,17 @@
+.vsc__bg__img {
+  background: url("./assets/home/bg-img.webp") no-repeat center center/cover;
+}
+
+.vsc__content {
+  height: 100%;
+  position: relative;
+  top: 0;
+  padding: 8rem 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
+}

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="relative isolate px-6 pt-10 lg:px-8">
         <div className="mx-auto max-w-2xl py-4 sm:py-28 lg:py-28">
           <div className="text-center">

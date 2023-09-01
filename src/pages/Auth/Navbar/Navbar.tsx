@@ -4,21 +4,18 @@ import { useState } from "react";
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   return (
-    <div className="w-[100%] mb-20">
+    <div className="w-[100%] mb-20 vsc__bg__img">
       {" "}
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
           aria-label="Global"
         >
-          <div className="flex lg:flex-1">
-            <Link to={"/"} className="-m-1.5 p-1.5">
+          <div className="flex lg:flex-1 items-center">
+            <Link to={"/"} className="-m-1.5 p-1.5 flex items-center">
               <span className="sr-only">Vote Secured In Chains</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+
+              <h1 className="text-2xl font-bold text-indigo-600">🗳 VSC</h1>
             </Link>
           </div>
           <div className="flex lg:hidden">

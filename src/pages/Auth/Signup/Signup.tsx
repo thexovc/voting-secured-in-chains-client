@@ -1,6 +1,43 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast"; // Import react-hot-toast
 
 const Signup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [matNo, setMatNo] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSignup = async () => {
+    if (password !== confirmPassword) {
+      console.error("Passwords do not match");
+      return;
+    }
+
+    const apiUrl = `${import.meta.env.VITE_API_URL}/auth/register`;
+
+    const requestData = {
+      name: name,
+      email: email,
+      password: password,
+      matNo: matNo,
+    };
+
+    try {
+      const response = await axios.post(apiUrl, requestData);
+      console.log("Registration successful!", response.data);
+      toast.success("Registration successful!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error during registration:", error);
+      toast.error("Error during registration");
+    }
+  };
+
   return (
     <div className="w-[100%]  min-h-screen flex justify-center ">
       {/* <div className="log__bg__img h-[100%] w-[100%]" /> */}
@@ -14,26 +51,45 @@ const Signup = () => {
           <input
             type="email"
             placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="p-3 rounded-lg border-indigo-300 focus:ring focus:ring-indigo-500 focus:outline-none border-2 hover:border-1"
           />
           <input
             type="text"
             placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="p-3 rounded-lg border-indigo-300 focus:ring focus:ring-indigo-500 focus:outline-none border-2 hover:border-1"
           />
           <input
             type="text"
             placeholder="Mat No"
+            value={matNo}
+            onChange={(e) => setMatNo(e.target.value)}
             className="p-3 rounded-lg border-indigo-300 focus:ring focus:ring-indigo-500 focus:outline-none border-2 hover:border-1"
           />
 
           <input
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="p-3 rounded-lg border-indigo-300 focus:ring focus:ring-indigo-500 focus:outline-none border-2 hover:border-1"
           />
 
-          <button className="bg-indigo-700 p-3 text-white rounded-lg text-md font-semibold">
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="p-3 rounded-lg border-indigo-300 focus:ring focus:ring-indigo-500 focus:outline-none border-2 hover:border-1"
+          />
+
+          <button
+            onClick={handleSignup}
+            className="bg-indigo-700 p-3 text-white rounded-lg text-md font-semibold"
+          >
             Sign Up
           </button>
 
