@@ -1,0 +1,206 @@
+/* PackagesTable.css */
+
+.pack__table__div {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  gap: 2rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.pack__table__head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.pack__table__head h2 {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.pack__table__container {
+  width: 100%;
+}
+
+.pack__table__wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.pack__table__content {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Set equal column width */
+  border-radius: 0.3rem;
+}
+
+.pack__table__header-row {
+  background-color: #fff;
+  font-weight: bold;
+  border-radius: 0.3rem;
+}
+
+.pack__table__header-cell,
+.pack__table__cell {
+  padding: 1rem;
+  text-align: center;
+  border: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  text-align: left;
+  width: 100%;
+}
+
+.pack__table__row:nth-child(even) {
+  background-color: #fff;
+}
+
+.pack__table__row:nth-child(odd) {
+  background-color: #fff;
+}
+.pack__table__row:hover {
+  background-color: #fff;
+}
+
+.pack__table__container table {
+  border: none;
+}
+
+.pack__table__container thead {
+  border: none;
+}
+
+.pack__table__container tr {
+  border: none;
+}
+
+.pack__table__container th {
+  border: none;
+}
+
+.pack__table__container tbody {
+  border: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+}
+
+.pack__table__container td {
+  border: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.pagination__item {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #ccc;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--btn-color);
+  font-size: 20px;
+}
+
+.pagination__item--active {
+  background-color: var(--btn-color);
+  color: black;
+  border-color: var(--btn-color);
+}
+
+.pagination__next {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #ccc;
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--btn-color);
+  font-size: 20px;
+}
+
+.pagination__previous {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #ccc;
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--btn-color);
+  font-size: 20px;
+}
+
+.mpnft__empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.7rem;
+}
+
+.mpnft__empty > h2 {
+  font-size: 25px;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+
+.mpnft__empty > p {
+  font-size: 20px;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+
+.mpnft__empty button {
+  display: flex;
+  padding: 0.6rem 2rem;
+  border-radius: 1rem;
+  border: none;
+  color: #fff;
+  background-color: #6f4ff2;
+  cursor: pointer;
+}
+
+/* PackagesTable.css */
+
+/* ... existing styles ... */
+
+@media (max-width: 768px) {
+  .pack__table__content {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* Set equal column width */
+    border-radius: 0.3rem;
+  }
+}

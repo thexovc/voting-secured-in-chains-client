@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserData";
 import { useEffect } from "react";
 // import Cookies from "js-cookie";
@@ -7,7 +7,7 @@ const Profile = () => {
   const { user, jwtToken } = useUser();
   const navigate = useNavigate();
 
-  console.log("user profilerr", user);
+  // console.log("user profilerr", user);
 
   useEffect(() => {
     // Check if user data exists in context or cookies
@@ -72,15 +72,29 @@ const Profile = () => {
                 {user.admin && (
                   <div className="text-center mt-4 mb-6 flex gap-4 w-full justify-center">
                     <div className="text-center mt-4 mb-6">
-                      <h3 className="text-lg bg-indigo-600 cursor-pointer p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 ">
+                      <Link
+                        to={"/addElection"}
+                        className="text-lg bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
+                      >
                         Create Election
-                      </h3>
+                      </Link>
                     </div>
 
                     <div className="text-center mt-4 mb-6">
-                      <h3 className="text-lg bg-indigo-700 cursor-pointer p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 ">
+                      <Link
+                        to={"/addPosition"}
+                        className="text-lg bg-indigo-700 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
+                      >
+                        Add Position
+                      </Link>
+                    </div>
+                    <div className="text-center mt-4 mb-6">
+                      <Link
+                        to={"/addPosition"}
+                        className="text-lg bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
+                      >
                         Add Candidate
-                      </h3>
+                      </Link>
                     </div>
                   </div>
                 )}

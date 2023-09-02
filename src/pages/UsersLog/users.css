@@ -1,0 +1,270 @@
+.pack__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 5rem 0;
+  background-color: #ebf3fd;
+}
+
+.pack__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+.pack__filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+  gap: 2rem;
+}
+
+.pack__filter__icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 15px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--btn-color);
+  color: #fff;
+  cursor: pointer;
+}
+
+.pack__filter__info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 5rem;
+  margin-bottom: 3rem;
+}
+
+.pack__filter__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.pack__filter__input {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  gap: 0.3rem;
+}
+
+.pack__filter__input label {
+  font-size: 15px;
+}
+.pack__filter__input input {
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 0.3rem;
+  outline: none;
+  border: 1px solid black;
+  transition: border-color 0.3s; /* Add a transition for a smoother effect */
+}
+
+.pack__filter__input select {
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 0.3rem;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: border-color 0.3s; /* Add a transition for a smoother effect */
+}
+
+.pack__filter__input input:focus {
+  border-color: lightblue; /* Change the border color when the input is in focus */
+  box-shadow: 0 0 5px rgba(0, 0, 255, 0.5); /* Add a box shadow for highlighting */
+}
+
+.pack__filter__input__group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 3rem;
+}
+.pack__filter__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.pack__filter__buttons button:nth-child(1) {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  border-radius: 0.3rem;
+  background-color: rgb(248, 105, 105); /* Equivalent red color for lightblue */
+  color: #fff; /* Example text color */
+  border: none; /* Example border styles */
+  cursor: pointer;
+}
+
+.pack__filter__buttons button:nth-child(2) {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  border-radius: 0.3rem;
+  background-color: rgb(77, 195, 234); /* Example background color */
+  color: #fff; /* Example text color */
+  border: none; /* Example border styles */
+  /* Add more styles as needed */
+  cursor: pointer;
+}
+
+.pack__filter__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.pack__filter__description ul {
+  list-style-type: none; /* Remove default bullet points */
+  padding-left: 1.5rem; /* Add some left padding for better spacing */
+  background-color: lightblue;
+  font-size: 15px;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.pack__filter__description ul li::before {
+  content: "➜"; /* Add a custom arrow symbol */
+  display: inline-block;
+  width: 1rem;
+  margin-right: 0.5rem;
+}
+
+.pack__filter__description p {
+  display: flex;
+  align-self: flex-start;
+  font-size: 16px;
+}
+
+.pack__table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.pack__fetch {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 90%;
+}
+
+.pack__fetch p {
+  font-size: 17px;
+}
+
+.pack__fetch__con {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.pack__fetch__con button {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.3rem;
+  background-color: rgb(77, 195, 234); /* Example background color */
+  color: #fff; /* Example text color */
+  border: none; /* Example border styles */
+  /* Add more styles as needed */
+  cursor: pointer;
+}
+
+.pack__fetch__div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  /* width: 50%; */
+  border: 1px solid #ddd;
+
+  padding: 0rem 0.5rem;
+  gap: 0.5rem;
+  padding-right: 0;
+  border-radius: 0.3rem;
+}
+
+.pack__fetch__div input {
+  all: unset;
+  background-color: #fff;
+  font-size: 15px;
+  padding: 0.5rem;
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+@media (max-width: 768px) {
+  .pack__filter__info {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 90%;
+    gap: 5rem;
+    margin-bottom: 3rem;
+  }
+
+  .pack__filter__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .pack__filter__input__group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 3rem;
+  }
+
+  .pack__fetch__con {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+}
