@@ -38,15 +38,15 @@ const Profile = () => {
                 </div>
                 <div className="text-center mt-4">
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 ">
-                    {user.name}
+                    {user?.name}
                   </h3>
                 </div>
                 <div className="text-center mt-4 mb-6">
                   <h3 className="text-2xl font-semibold leading-normal mb-2 text-blueGray-400 ">
-                    MatNo: {user!.matNo}
+                    MatNo: {user?.matNo}
                   </h3>
                 </div>
-                {user.candidate && (
+                {user?.candidate && (
                   <div className="mt-2 py-10 border-t border-blueGray-200 text-center">
                     <div className="flex flex-wrap justify-center">
                       <div className="w-full lg:w-8/12 md:px-4">
@@ -69,11 +69,11 @@ const Profile = () => {
                   </div>
                 )}
 
-                {user.admin && (
+                {user?.admin && (
                   <div className="text-center mt-4 mb-6 flex gap-4 w-full justify-center">
                     <div className="text-center mt-4 mb-6">
                       <Link
-                        to={"/addElection"}
+                        to={"/admin/addElection"}
                         className="text-lg bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
                       >
                         Create Election
@@ -82,7 +82,7 @@ const Profile = () => {
 
                     <div className="text-center mt-4 mb-6">
                       <Link
-                        to={"/addPosition"}
+                        to={"/admin/addPosition"}
                         className="text-lg bg-indigo-700 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
                       >
                         Add Position
@@ -90,7 +90,7 @@ const Profile = () => {
                     </div>
                     <div className="text-center mt-4 mb-6">
                       <Link
-                        to={"/addPosition"}
+                        to={"/admin/allelection"}
                         className="text-lg bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
                       >
                         Add Candidate

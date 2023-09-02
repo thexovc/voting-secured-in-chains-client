@@ -40,7 +40,7 @@ const Login = () => {
       Cookies.set("jwtToken", jwtToken);
       Cookies.set("userData", userData);
 
-      navigate("/profile");
+      window.location.href = "/profile";
 
       toast.success("Login successful!"); // Show success toast message
     } catch (error) {

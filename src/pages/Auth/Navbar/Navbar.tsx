@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useUser } from "../../../context/UserData";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const { jwtToken } = useUser();
+
+  function logout() {
+    // Remove the cookies you want to clear
+    Cookies.remove("userData"); // Replace 'accessToken' with your actual cookie name
+    Cookies.remove("jwtToken"); // Replace 'userId' with your actual cookie name
+
+    window.location.href = "/login";
+  }
+
   return (
     <div className="w-[100%] mb-20 vsc__bg__img">
       {" "}
@@ -55,15 +67,35 @@ const Navbar = () => {
             >
               Result
             </Link>
+
+            {jwtToken && (
+              <>
+                <Link
+                  to={"/vote"}
+                  className="text-sm font-semibold text-indigo-800 leading-6 underline underline-offset-4"
+                >
+                  Vote
+                </Link>
+              </>
+            )}
           </div>
 
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link
-              to={"/login"}
-              className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
-            >
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
+            {jwtToken ? (
+              <div
+                onClick={logout}
+                className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
+              >
+                <span aria-hidden="true">&rarr;</span> Log Out
+              </div>
+            ) : (
+              <Link
+                to={"/login"}
+                className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
+              >
+                Log in <span aria-hidden="true">&rarr;</span>
+              </Link>
+            )}
           </div>
         </nav>
         {/* mobile nav */}
@@ -114,12 +146,12 @@ const Navbar = () => {
                       </Link>
                     </div>
                     <div className="py-1">
-                      <Link
-                        to={"/result"}
+                      <div
+                        onClick={logout}
                         className="-mx-3 block rounded-lg px-3 py-0.5 text-base font-semibold leading-7 text-indigo-600 hover:bg-gray-50"
                       >
                         Result
-                      </Link>
+                      </div>
                     </div>
                   </div>
                   <div className="py-1 flex flex-col gap-2 items-end px-8">
