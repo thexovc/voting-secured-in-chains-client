@@ -20,21 +20,26 @@ import Users from "./pages/UsersLog/users";
 import AddCandidate from "./pages/Admin/Candidate/AddCandidate";
 import ElectionAdmin from "./pages/Admin/Election/ElectionAdmin";
 import ElectionUser from "./pages/User/Election/ElectionUser";
+import HomeOutlet from "./pages/Outlet/HomeOutlet";
+import ElectionOption from "./pages/User/Election/ElectionOption";
 
 function Router() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route>
-          <Route path="/" element={<UserOutlet />}>
+          <Route path="/" element={<HomeOutlet />}>
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NoMatch />} />
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
-            <Route path="campaign" element={<Campaign />} />
+          </Route>
+          <Route path="/" element={<UserOutlet />}>
+            <Route path="campaign/:id" element={<Campaign />} />
             <Route path="profile" element={<Profile />} />
             <Route path="vote" element={<ElectionUser />} />
-            <Route path="voteElection" element={<Vote />} />
+            <Route path="voteOption/:id" element={<ElectionOption />} />
+            <Route path="voteElection/:id" element={<Vote />} />
             <Route path="result" element={<Result />} />
             <Route path="setting" element={<Settings />} />
             <Route path="admin/addElection" element={<AddElection />} />

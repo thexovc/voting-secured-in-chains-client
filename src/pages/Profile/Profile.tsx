@@ -29,7 +29,7 @@ const Profile = () => {
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                     <div className="relative">
                       <div className="w-20 h-20 rounded-full bg-zinc-700 flex justify-center items-center">
-                        <p className="text-white text-lg">
+                        <p className="text-white font-semibold  text-4xl flex-1 flex justify-center items-center">
                           {user!.name.slice(0, 2)}
                         </p>
                       </div>
@@ -71,29 +71,20 @@ const Profile = () => {
 
                 {user?.admin && (
                   <div className="text-center mt-4 mb-6 flex gap-4 w-full justify-center">
-                    <div className="text-center mt-4 mb-6">
-                      <Link
-                        to={"/admin/addElection"}
-                        className="text-lg bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
-                      >
-                        Create Election
+                    <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                      <Link to={"/admin/addElection"} className="md:text-lg  ">
+                        🗳 Create Election
                       </Link>
                     </div>
 
-                    <div className="text-center mt-4 mb-6">
-                      <Link
-                        to={"/admin/addPosition"}
-                        className="text-lg bg-indigo-700 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
-                      >
-                        Add Position
+                    <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                      <Link to={"/admin/addPosition"} className="md:text-lg">
+                        👥 Add Position
                       </Link>
                     </div>
-                    <div className="text-center mt-4 mb-6">
-                      <Link
-                        to={"/admin/allelection"}
-                        className="text-lg bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400 "
-                      >
-                        Add Candidate
+                    <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                      <Link to={"/admin/allelection"} className="md:text-lg ">
+                        🗣️ Add Candidate
                       </Link>
                     </div>
                   </div>

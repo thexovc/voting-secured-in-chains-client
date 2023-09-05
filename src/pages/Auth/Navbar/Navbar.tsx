@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUser } from "../../../context/UserData";
 import Cookies from "js-cookie";
@@ -6,9 +6,9 @@ import Cookies from "js-cookie";
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const { jwtToken } = useUser();
+  const navigate = useNavigate();
 
   function logout() {
-    // Remove the cookies you want to clear
     Cookies.remove("userData"); // Replace 'accessToken' with your actual cookie name
     Cookies.remove("jwtToken"); // Replace 'userId' with your actual cookie name
 
@@ -31,6 +31,14 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex lg:hidden">
+            {jwtToken && (
+              <div
+                onClick={() => navigate("/profile")}
+                className="text-md flex items-center cursor-pointer justify-center text-white w-10 h-10 border-4 border-indigo-200 bg-indigo-600 hover:bg-indigo-300 rounded-full "
+              >
+                🏠
+              </div>
+            )}
             <button
               type="button"
               onClick={() => setToggle(true)}
@@ -56,25 +64,19 @@ const Navbar = () => {
 
           <div className="hidden lg:flex lg:gap-x-12">
             <Link
-              to={"/campaign"}
-              className="text-sm font-semibold text-indigo-800 leading-6 underline underline-offset-4"
-            >
-              Campaign
-            </Link>
-            <Link
               to={"/result"}
-              className="text-sm font-semibold text-indigo-800 leading-6 underline underline-offset-4"
+              className="text-md font-semibold text-indigo-800 leading-6 underline underline-offset-4"
             >
-              Result
+              📊 Result
             </Link>
 
             {jwtToken && (
               <>
                 <Link
                   to={"/vote"}
-                  className="text-sm font-semibold text-indigo-800 leading-6 underline underline-offset-4"
+                  className="text-md font-semibold text-indigo-800 leading-6 underline underline-offset-4"
                 >
-                  Vote
+                  🗳 Vote
                 </Link>
               </>
             )}
@@ -82,11 +84,19 @@ const Navbar = () => {
 
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             {jwtToken ? (
-              <div
-                onClick={logout}
-                className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
-              >
-                <span aria-hidden="true">&rarr;</span> Log Out
+              <div className="flex gap-5">
+                <div
+                  onClick={() => navigate("/profile")}
+                  className="text-md flex items-center cursor-pointer justify-center text-white w-10 h-10 border-4 border-indigo-200 bg-indigo-600 hover:bg-indigo-300 rounded-full "
+                >
+                  🏠
+                </div>
+                <div
+                  onClick={logout}
+                  className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
+                >
+                  <span aria-hidden="true">&rarr;</span> Log Out
+                </div>
               </div>
             ) : (
               <Link
@@ -139,34 +149,45 @@ const Navbar = () => {
                   <div className="py-6 flex flex-col items-end px-8">
                     <div className="py-1">
                       <Link
-                        to={"/campaign"}
-                        className="-mx-3 block rounded-lg px-3 py-0.5 text-base font-semibold leading-7 text-indigo-600 hover:bg-gray-50"
+                        onClick={() => setToggle(false)}
+                        to={"/result"}
+                        className="text-md font-semibold text-indigo-800 leading-6 "
                       >
-                        Campaign
+                        📊 Result
                       </Link>
                     </div>
                     <div className="py-1">
-                      <div
-                        onClick={logout}
-                        className="-mx-3 block rounded-lg px-3 py-0.5 text-base font-semibold leading-7 text-indigo-600 hover:bg-gray-50"
-                      >
-                        Result
-                      </div>
+                      {jwtToken && (
+                        <>
+                          <Link
+                            onClick={() => setToggle(false)}
+                            to={"/vote"}
+                            className="text-md font-semibold text-indigo-800 leading-6 "
+                          >
+                            🗳 Vote
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
                   <div className="py-1 flex flex-col gap-2 items-end px-8">
-                    <Link
-                      to={"/login"}
-                      className="-mx-3 block rounded-lg px-3 py-1 border-2 border-indigo-400  text-base font-semibold leading-7 text-indigo-900 hover:bg-gray-50"
-                    >
-                      Log in
-                    </Link>
-                    <Link
-                      to={"/signup"}
-                      className="-mx-3 block rounded-lg px-3 py-1 border-2 border-indigo-400  text-base font-semibold leading-7 text-indigo-900 hover:bg-gray-50"
-                    >
-                      Signup
-                    </Link>
+                    {jwtToken ? (
+                      <div className="flex gap-5">
+                        <div
+                          onClick={logout}
+                          className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
+                        >
+                          <span aria-hidden="true">&rarr;</span> Log Out
+                        </div>
+                      </div>
+                    ) : (
+                      <Link
+                        to={"/login"}
+                        className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
+                      >
+                        Log in <span aria-hidden="true">&rarr;</span>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

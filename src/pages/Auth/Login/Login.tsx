@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast"; // Import react-hot-toast
@@ -7,8 +7,6 @@ import toast from "react-hot-toast"; // Import react-hot-toast
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
 
   // // Read the value of the "jwtToken" cookie
   // const jwtToken = Cookies.get("jwtToken");

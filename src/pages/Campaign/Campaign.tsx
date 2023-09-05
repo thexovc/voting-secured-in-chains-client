@@ -1,6 +1,19 @@
+import axios from "axios";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
 const Campaign = () => {
+  // const fetchCandidates = async () => {
+  //   const response = await axios.get(
+  //     `${import.meta.env.VITE_API_URL}/election/allCandidates`
+  //   );
+  //   return response.data;
+  // };
+
+  // const { data: allCandidates } = useQuery("users", fetchCandidates);
+
+  // console.log({ allCandidates });
+
   return (
     <div className="w-[100%] text-center">
       <div className="w-[100%] mt-8">
