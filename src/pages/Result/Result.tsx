@@ -1,68 +1,106 @@
+import axios from "axios";
+import { useQuery } from "react-query";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
+
 const Result = () => {
-  const hh = 70;
+  const navigate = useNavigate();
+
+  const { id: electionId } = useParams();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const electionName = queryParams.get("election");
+
+  const { data: electionResults } = useQuery(
+    "electionResults",
+    fetchElectionResults
+  );
+
+  async function fetchElectionResults() {
+    const jwtToken = Cookies.get("jwtToken");
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/election/checkWinner/${electionId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          // Set the JWT token in the authorization header
+          Authorization: `Bearer ${jwtToken?.slice(1, -1)}`,
+        },
+      }
+    );
+    return response.data;
+  }
+
+  // console.log({ electionResults });
+
+  const positionsWithTotalVotes = electionResults.map((position: any) => ({
+    ...position,
+    totalVotes: position.candidates.reduce(
+      (total: any, candidate: any) => total + candidate.votes,
+      0
+    ),
+  }));
+
+  // console.log({ positionsWithTotalVotes });
+
+  const totalElectionVotes = electionResults.reduce(
+    (total: any, position: any) => {
+      return (
+        total +
+        position.candidates.reduce((subTotal: any, candidate: any) => {
+          return subTotal + candidate.votes;
+        }, 0)
+      );
+    },
+    0
+  );
+
   return (
     <div className="md:w-2/3 w-[90%] mx-auto">
-      <h1 className="text-3xl text-center pt-4 pb-6"> 1,745 Total Vote</h1>
-      <div className="md:w-2/3 w-[90%]  border-2 border-indigo-700 p-4 rounded-lg mx-auto">
-        <p className="text-md font-medium text-gray-500 dark:text-gray-400">
-          NACOSS PRESIDENT
-        </p>
-        <div className="flex items-center mt-4">
-          <a className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
-            Ose Ebuka
-          </a>
-          <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-            <div className={`h-5 bg-yellow-300 rounded w-[${hh}%]`}></div>
-          </div>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            980 vote
-          </span>
+      <h1 className="text-3xl text-center pt-4 pb-6">
+        {" "}
+        {electionName || ""} Election
+        <br />
+        <span className="text-slate-600 text-lg">
+          {totalElectionVotes} Total Vote
+        </span>
+      </h1>
+      {positionsWithTotalVotes?.map((position: any, index: any) => (
+        <div
+          key={index}
+          className="md:w-2/3 w-[90%] my-5 border-2 border-indigo-700 p-4 rounded-lg mx-auto"
+        >
+          <p className="text-md font-medium text-gray-500 dark:text-gray-400">
+            {position.position}
+          </p>
+          {position?.candidates?.map((cand: any, candInx: any) => {
+            const perc = Number(
+              (cand.votes / position.totalVotes) * 100
+            ).toFixed(0);
+            console.log(perc);
+
+            const perTxt = `w-[${perc}%]`;
+
+            console.log(perTxt);
+
+            return (
+              <div key={candInx} className="flex items-center mt-4">
+                <a className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                  {cand.name}
+                </a>
+                <div className="w-full h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
+                  <div className={`h-5 bg-yellow-300 rounded ${perTxt}`}></div>
+                </div>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  {cand.votes} vote
+                </span>
+              </div>
+            );
+          })}
         </div>
-        <div className="flex items-center mt-4">
-          <a className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
-            Debbie Sharon
-          </a>
-          <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-            <div className="h-5 bg-yellow-300 rounded w-[17%]"></div>
-          </div>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            200 vote
-          </span>
-        </div>
-        <div className="flex items-center mt-4">
-          <a className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
-            Frank Ayomide
-          </a>
-          <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-            <div className="h-5 bg-yellow-300 rounded w-[8%]"></div>
-          </div>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            120 vote
-          </span>
-        </div>
-        <div className="flex items-center mt-4">
-          <a className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
-            Osaro Osayeme
-          </a>
-          <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-            <div className="h-5 bg-yellow-300 rounded w-[4%]"></div>
-          </div>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            79 vote
-          </span>
-        </div>
-        <div className="flex items-center mt-4">
-          <a className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
-            Uche Blessing
-          </a>
-          <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-            <div className="h-5 bg-yellow-300 rounded w-[1%]"></div>
-          </div>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            34 vote
-          </span>
-        </div>
-      </div>
+      ))}
     </div>
   );
 };

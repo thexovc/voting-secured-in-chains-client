@@ -81,7 +81,9 @@ const AddCandidate = () => {
       })
       .catch((error) => {
         console.error("Error adding Candidate:", error);
-        toast.error("Error adding Candidate");
+        toast.error(
+          "Error adding Candidate, a candidate can only run for one position"
+        );
         setUserEmail("");
         setUserName("");
       });
