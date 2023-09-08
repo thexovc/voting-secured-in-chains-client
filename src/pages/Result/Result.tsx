@@ -1,22 +1,20 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
-import toast from "react-hot-toast";
 
 const Result = () => {
-  const navigate = useNavigate();
-
   const { id: electionId } = useParams();
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const electionName = queryParams.get("election");
 
-  const { data: electionResults } = useQuery(
-    "electionResults",
-    fetchElectionResults
-  );
+  const {
+    data: electionResults,
+    isLoading,
+    isError,
+  } = useQuery("electionResults", fetchElectionResults);
 
   async function fetchElectionResults() {
     const jwtToken = Cookies.get("jwtToken");
@@ -35,9 +33,17 @@ const Result = () => {
 
   // console.log({ electionResults });
 
-  const positionsWithTotalVotes = electionResults.map((position: any) => ({
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error occured</p>;
+  }
+
+  const positionsWithTotalVotes = electionResults?.map((position: any) => ({
     ...position,
-    totalVotes: position.candidates.reduce(
+    totalVotes: position?.candidates?.reduce(
       (total: any, candidate: any) => total + candidate.votes,
       0
     ),
@@ -45,11 +51,11 @@ const Result = () => {
 
   // console.log({ positionsWithTotalVotes });
 
-  const totalElectionVotes = electionResults.reduce(
+  const totalElectionVotes = electionResults?.reduce(
     (total: any, position: any) => {
       return (
         total +
-        position.candidates.reduce((subTotal: any, candidate: any) => {
+        position?.candidates?.reduce((subTotal: any, candidate: any) => {
           return subTotal + candidate.votes;
         }, 0)
       );
@@ -76,24 +82,28 @@ const Result = () => {
             {position.position}
           </p>
           {position?.candidates?.map((cand: any, candInx: any) => {
-            const perc = Number(
-              (cand.votes / position.totalVotes) * 100
-            ).toFixed(0);
-            console.log(perc);
+            // const perc = Number(
+            //   (cand.votes / position.totalVotes) * 100
+            // ).toFixed(0);
+            // console.log(perc);
 
-            const perTxt = `w-[${perc}%]`;
+            // const perTxt = `w-[${perc}%]`;
 
-            console.log(perTxt);
+            // console.log(perTxt);
 
             return (
-              <div key={candInx} className="flex items-center mt-4">
-                <a className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
+              <div
+                key={candInx}
+                className="flex justify-between items-center mt-4"
+              >
+                <a className="text-lg font-medium text-blue-600 dark:text-blue-500 hover:underline">
                   {cand.name}
                 </a>
-                <div className="w-full h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                  <div className={`h-5 bg-yellow-300 rounded ${perTxt}`}></div>
-                </div>
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                {/* <div className="w-full h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
+                  {/* <div className={`h-5 bg-yellow-300 rounded ${perTxt}`}></div> */}
+                {/* </div> */}
+
+                <span className="text-md font-medium text-gray-800 dark:text-gray-400">
                   {cand.votes} vote
                 </span>
               </div>
