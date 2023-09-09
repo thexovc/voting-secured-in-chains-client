@@ -177,10 +177,13 @@ const Navbar = () => {
                   </div>
                   <div className="py-1 flex flex-col gap-2 items-end px-8">
                     {jwtToken ? (
-                      <div className="flex gap-5">
+                      <div className="flex gap-5 flex-col">
+                        <div className="text-md font-semibold text-indigo-800 leading-6 ">
+                          <Web3Button />
+                        </div>
                         <div
                           onClick={logout}
-                          className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
+                          className="text-md text-center bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
                         >
                           <span aria-hidden="true">&rarr;</span> Log Out
                         </div>

@@ -3,10 +3,13 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import { addPosition } from "../../../utils/electionHelper";
+import { BeatLoader } from "react-spinners";
 
 const AddPosition = () => {
   const [electionName, setElectionName] = useState("");
   const [positionTitle, setPositionTitle] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchElections = async () => {
     const response = await axios.get(
@@ -20,10 +23,17 @@ const AddPosition = () => {
   console.log({ allElections });
 
   const handleAddPosition = async () => {
+    await checkWeb3AndSwitchToMumbai().catch((err) => {
+      console.log("err", err);
+      throw new Error(err);
+    });
+
+    setIsLoading(true);
     // console.log({ electionName, positionTitle });
 
     if (!positionTitle) {
       toast.error("Please fill in all required fields.");
+      setIsLoading(false);
       return;
     }
 
@@ -51,12 +61,31 @@ const AddPosition = () => {
           Authorization: `Bearer ${jwtToken?.slice(1, -1)}`,
         },
       })
-      .then((response) => {
+      .then(async (response) => {
         console.log("Position added successfully:", response.data);
+
+        await addPosition(electionName, response.data.id, positionTitle)
+          .then((res) => {
+            setIsLoading(false);
+
+            console.log(res);
+
+            toast.success("Position Added! Wait for confirmation");
+            // window.location.reload();
+          })
+          .catch((err) => {
+            setIsLoading(false);
+
+            toast.error("An error occured try again");
+            console.log("err696:", err);
+          });
+        setIsLoading(false);
+
         toast.success("Position added successfully");
         setPositionTitle("");
       })
       .catch((error) => {
+        setIsLoading(false);
         console.error("Error adding Position:", error);
         toast.error("Error adding Position");
       });
@@ -91,9 +120,9 @@ const AddPosition = () => {
 
           <button
             onClick={handleAddPosition}
-            className="bg-indigo-700 p-3 text-white rounded-lg text-md font-semibold"
+            className="bg-indigo-700 p-3 hover:bg-indigo-500 text-white rounded-lg text-md font-semibold"
           >
-            Create
+            {isLoading ? <BeatLoader color="#36d7b7" /> : "Add Position"}
           </button>
         </div>
       </div>
@@ -102,3 +131,41 @@ const AddPosition = () => {
 };
 
 export default AddPosition;
+
+async function checkWeb3AndSwitchToMumbai() {
+  // Check if the Web3 provider is available
+  if (typeof window.ethereum === "undefined") {
+    toast.error("Connect Your wallet");
+    throw new Error("Web3 provider not detected. ");
+  }
+
+  // Check if the user is already on the Mumbai Testnet (chain ID 80001)
+  const chainId = await window.ethereum.request({ method: "eth_chainId" });
+  if (chainId === "0x13881" || chainId === "0x13881") {
+    // toast.error("You are already on the Polygon Mumbai Testnet.");
+    return;
+  }
+
+  try {
+    // Request to switch to the Polygon Mumbai Testnet (chain ID 80001)
+    await window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x13881" }], // Polygon Mumbai Testnet chain ID
+    });
+
+    // Check if the user has switched to the Mumbai Testnet
+    const newChainId = await window.ethereum.request({ method: "eth_chainId" });
+    if (newChainId === "0x13881") {
+      // toast.success("Switched to the Polygon Mumbai Testnet successfully.");
+    } else {
+      toast.error(
+        "Failed to switch to the Polygon Mumbai Testnet. Please switch manually."
+      );
+    }
+  } catch (error) {
+    console.error("Error switching to the Polygon Mumbai Testnet:", error);
+    toast.error(
+      "Error switching to the Polygon Mumbai Testnet. Please switch manually."
+    );
+  }
+}
