@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUser } from "../../../context/UserData";
 import Cookies from "js-cookie";
+import { Web3Button } from "@web3modal/react";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -85,12 +86,16 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             {jwtToken ? (
               <div className="flex gap-5">
+                <div className="text-md flex mx-10 items-center cursor-pointer justify-center text-white w-10 h-10 border-4 border-indigo-200 bg-indigo-600 hover:bg-indigo-300 rounded-full ">
+                  <Web3Button />
+                </div>
                 <div
                   onClick={() => navigate("/profile")}
                   className="text-md flex items-center cursor-pointer justify-center text-white w-10 h-10 border-4 border-indigo-200 bg-indigo-600 hover:bg-indigo-300 rounded-full "
                 >
                   🏠
                 </div>
+
                 <div
                   onClick={logout}
                   className="text-md bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"
