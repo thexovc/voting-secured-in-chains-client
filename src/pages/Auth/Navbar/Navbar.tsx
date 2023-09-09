@@ -33,12 +33,17 @@ const Navbar = () => {
           </div>
           <div className="flex lg:hidden">
             {jwtToken && (
-              <div
-                onClick={() => navigate("/profile")}
-                className="text-md flex items-center cursor-pointer justify-center text-white w-10 h-10 border-4 border-indigo-200 bg-indigo-600 hover:bg-indigo-300 rounded-full "
-              >
-                🏠
-              </div>
+              <>
+                <div className="text-md flex mx-16 items-center cursor-pointer justify-center text-white w-10 h-10 border-4 border-indigo-200 bg-indigo-600 hover:bg-indigo-300 rounded-full ">
+                  <Web3Button />
+                </div>
+                <div
+                  onClick={() => navigate("/profile")}
+                  className="text-md flex items-center cursor-pointer justify-center text-white w-10 h-10 border-4 border-indigo-200 bg-indigo-600 hover:bg-indigo-300 rounded-full "
+                >
+                  🏠
+                </div>
+              </>
             )}
             <button
               type="button"
@@ -178,9 +183,6 @@ const Navbar = () => {
                   <div className="py-1 flex flex-col gap-2 items-end px-8">
                     {jwtToken ? (
                       <div className="flex gap-5 flex-col">
-                        <div className="text-md font-semibold text-indigo-800 leading-6 ">
-                          <Web3Button />
-                        </div>
                         <div
                           onClick={logout}
                           className="text-md text-center bg-indigo-600 rounded-md hover:bg-indigo-800 cursor-pointer font-semibold leading-6  text-white p-3"

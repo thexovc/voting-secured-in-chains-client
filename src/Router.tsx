@@ -8,6 +8,7 @@ import Login from "./pages/Auth/Login/Login";
 import Signup from "./pages/Auth/Signup/Signup";
 import Home from "./pages/Home/Home";
 import NoMatch from "./NoMatch";
+import ErrorPage from "./ErrorPage";
 import Campaign from "./pages/Campaign/Campaign";
 import Profile from "./pages/Profile/Profile";
 import UserOutlet from "./pages/Outlet/UserOutlet";
@@ -35,7 +36,7 @@ function Router() {
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
           </Route>
-          <Route path="/" element={<UserOutlet />}>
+          <Route path="/" element={<UserOutlet />} errorElement={<ErrorPage />}>
             <Route path="campaign/:id" element={<Campaign />} />
             <Route path="profile" element={<Profile />} />
             <Route path="vote" element={<ElectionUser />} />

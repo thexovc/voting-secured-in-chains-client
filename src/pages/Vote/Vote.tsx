@@ -5,6 +5,8 @@ import Cookies from "js-cookie";
 import { useQuery } from "react-query";
 import { useUser } from "../../context/UserData";
 import toast from "react-hot-toast";
+import { vote } from "../../utils/electionHelper";
+import { BeatLoader } from "react-spinners";
 
 type VotedItem = {
   positionId: string;
@@ -13,6 +15,13 @@ type VotedItem = {
 
 const Vote = () => {
   const { id: electionId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+
+  // const navigate = useNavigate();
+
+  // // if (electionId) {
+  // //   navigate("/vote");
+  // // }
 
   const { user } = useUser();
 
@@ -56,29 +65,61 @@ const Vote = () => {
   };
 
   const handleVote = async (positionId: string, candidateId: string) => {
-    try {
-      const jwtToken = Cookies.get("jwtToken");
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/election/vote`,
-        {
-          userId: user?.userId,
-          positionId,
-          electionId,
-          candidateId,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtToken?.slice(1, -1)}`,
-          },
-        }
-      );
-      setAlreadyVoted([...alreadyVoted, { positionId, candidateId }]);
-      console.log("Vote submitted:", response.data);
-      toast.success("Voted");
-    } catch (error) {
-      toast.error("Error Voting");
-      console.error("Error submitting vote:", error);
+    setIsLoading(true);
+    if (electionId) {
+      try {
+        await checkWeb3AndSwitchToMumbai().catch((err) => {
+          console.log("err", err);
+          setIsLoading(false);
+          throw new Error(err);
+        });
+
+        const jwtToken = Cookies.get("jwtToken");
+        await axios
+          .post(
+            `${import.meta.env.VITE_API_URL}/election/vote`,
+            {
+              userId: user?.userId,
+              positionId,
+              electionId,
+              candidateId,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwtToken?.slice(1, -1)}`,
+              },
+            }
+          )
+          .then(async (res) => {
+            await vote(electionId, positionId, candidateId)
+              .then((res) => {
+                console.log(res);
+                setIsLoading(false);
+
+                toast.success("Voted!!");
+                // window.location.reload();
+              })
+              .catch((err) => {
+                setIsLoading(false);
+
+                toast.error("Error Voting");
+                console.log("err696:", err);
+              });
+          })
+          .catch((err) => {
+            setIsLoading(false);
+
+            console.error("Error voting for Candidate:", err);
+            toast.error("Error voting for Candidate");
+          });
+        setAlreadyVoted([...alreadyVoted, { positionId, candidateId }]);
+      } catch (error) {
+        toast.error("Error Voting");
+        console.error("Error submitting vote:", error);
+      }
+    } else {
+      return;
     }
   };
 
@@ -110,7 +151,7 @@ const Vote = () => {
                   {/* SVG path */}
                 </svg>
               </div>
-              {isToggled && (
+              {true && (
                 <>
                   {item?.candidate?.map((cand: any, indexCand: any) => (
                     <div
@@ -148,9 +189,19 @@ const Vote = () => {
                             (vote) =>
                               vote.positionId === item.id &&
                               vote.candidateId === cand.id
-                          )
-                            ? "Voted"
-                            : "Vote"}
+                          ) ? (
+                            "Voted"
+                          ) : (
+                            <>
+                              {isLoading ? (
+                                <div className="flex w-full">
+                                  <BeatLoader color="#36d7b7" />
+                                </div>
+                              ) : (
+                                "vote"
+                              )}
+                            </>
+                          )}
                         </button>
                       </div>
                     </div>
@@ -166,3 +217,41 @@ const Vote = () => {
 };
 
 export default Vote;
+
+async function checkWeb3AndSwitchToMumbai() {
+  // Check if the Web3 provider is available
+  if (typeof window.ethereum === "undefined") {
+    toast.error("Connect Your wallet");
+    throw new Error("Web3 provider not detected. ");
+  }
+
+  // Check if the user is already on the Mumbai Testnet (chain ID 80001)
+  const chainId = await window.ethereum.request({ method: "eth_chainId" });
+  if (chainId === "0x13881" || chainId === "0x13881") {
+    // toast.error("You are already on the Polygon Mumbai Testnet.");
+    return;
+  }
+
+  try {
+    // Request to switch to the Polygon Mumbai Testnet (chain ID 80001)
+    await window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x13881" }], // Polygon Mumbai Testnet chain ID
+    });
+
+    // Check if the user has switched to the Mumbai Testnet
+    const newChainId = await window.ethereum.request({ method: "eth_chainId" });
+    if (newChainId === "0x13881") {
+      // toast.success("Switched to the Polygon Mumbai Testnet successfully.");
+    } else {
+      toast.error(
+        "Failed to switch to the Polygon Mumbai Testnet. Please switch manually."
+      );
+    }
+  } catch (error) {
+    console.error("Error switching to the Polygon Mumbai Testnet:", error);
+    toast.error(
+      "Error switching to the Polygon Mumbai Testnet. Please switch manually."
+    );
+  }
+}
