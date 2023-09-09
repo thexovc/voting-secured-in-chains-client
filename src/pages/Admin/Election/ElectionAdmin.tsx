@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { differenceInDays } from "date-fns"; // Import date-fns functions
 
 const ElectionAdmin = () => {

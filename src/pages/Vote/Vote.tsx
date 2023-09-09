@@ -92,6 +92,7 @@ const Vote = () => {
             }
           )
           .then(async (res) => {
+            console.log(res);
             await vote(electionId, positionId, candidateId)
               .then((res) => {
                 console.log(res);
