@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
 const Campaign = () => {

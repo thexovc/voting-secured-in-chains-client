@@ -1,7 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 import Cookies from "js-cookie";
-import axios, { all } from "axios";
-import { useQuery } from "react-query";
 
 const UserContext = createContext<any>({}); // Use any as the default value type
 

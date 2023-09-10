@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { differenceInDays, isAfter } from "date-fns"; // Import date-fns functions
+import { differenceInDays } from "date-fns"; // Import date-fns functions
 
 const ElectionUser = () => {
   const navigate = useNavigate();

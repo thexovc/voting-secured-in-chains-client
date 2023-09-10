@@ -3,7 +3,6 @@ import { useTable, Column } from "react-table";
 import "./usersTable.css";
 import ReactPaginate from "react-paginate";
 import emptyBox from "../emptybox.png";
-import { useUser } from "../../../context/UserData";
 import axios from "axios";
 import { useQuery } from "react-query";
 
