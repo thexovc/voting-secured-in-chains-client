@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast"; // Import react-hot-toast
@@ -29,9 +29,12 @@ const Signup = () => {
 
     try {
       const response = await axios.post(apiUrl, requestData);
-      console.log("Registration successful!", response.data);
+      console.log(
+        "Registration successful!, check email for QR CODE",
+        response.data
+      );
       toast.success("Registration successful!");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error("Error during registration:", error);
       toast.error("Error during registration");
