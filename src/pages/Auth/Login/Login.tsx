@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast"; // Import react-hot-toast
+import { BeatLoader } from "react-spinners";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // // Read the value of the "jwtToken" cookie
   // const jwtToken = Cookies.get("jwtToken");
@@ -19,6 +21,7 @@ const Login = () => {
   // }
 
   const handleLogin = async () => {
+    setIsLoading(true);
     const apiUrl = `${import.meta.env.VITE_API_URL}/auth/login`;
 
     console.log(apiUrl);
@@ -41,7 +44,9 @@ const Login = () => {
       window.location.href = "/profile";
 
       toast.success("Login successful!"); // Show success toast message
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast.error("Login failed. Please check your credentials."); // Show error toast message
       console.error("Error during login:", error);
     }
@@ -74,7 +79,7 @@ const Login = () => {
             onClick={handleLogin}
             className="bg-indigo-700 p-3 rounded-lg text-white text-md font-semibold"
           >
-            Sign In
+            {isLoading ? <BeatLoader color="#36d7b7" /> : " Sign In"}
           </button>
 
           <div className="w-full text-center">

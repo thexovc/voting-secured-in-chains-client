@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast"; // Import react-hot-toast
+import { BeatLoader } from "react-spinners";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -9,12 +10,15 @@ const Signup = () => {
   const [matNo, setMatNo] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSignup = async () => {
+    setIsLoading(true);
     if (password !== confirmPassword) {
       console.error("Passwords do not match");
+      setIsLoading(false);
       return;
     }
 
@@ -35,7 +39,9 @@ const Signup = () => {
       );
       toast.success("Registration successful!");
       navigate("/login");
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.error("Error during registration:", error);
       toast.error("Error during registration");
     }
@@ -93,7 +99,7 @@ const Signup = () => {
             onClick={handleSignup}
             className="bg-indigo-700 p-3 text-white rounded-lg text-md font-semibold"
           >
-            Sign Up
+            {isLoading ? <BeatLoader color="#36d7b7" /> : " Sign Up"}
           </button>
 
           <div className="w-full text-center">

@@ -41,11 +41,13 @@ const Profile = () => {
                     {user?.name}
                   </h3>
                 </div>
-                <div className="text-center mt-4 mb-6">
-                  <h3 className="text-2xl font-semibold leading-normal mb-2 text-blueGray-400 ">
-                    MatNo: {user?.matNo}
-                  </h3>
-                </div>
+                {!user?.admin && (
+                  <div className="text-center mt-4 mb-6">
+                    <h3 className="text-2xl font-semibold leading-normal mb-2 text-blueGray-400 ">
+                      MatNo: {user?.matNo}
+                    </h3>
+                  </div>
+                )}
                 {user?.candidate && (
                   <div className="mt-2 py-10 border-t border-blueGray-200 text-center">
                     <div className="flex flex-wrap justify-center">
