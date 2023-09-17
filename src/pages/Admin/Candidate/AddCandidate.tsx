@@ -214,6 +214,23 @@ async function checkWeb3AndSwitchToMumbai() {
         "Failed to switch to the Polygon Mumbai Testnet. Please switch manually."
       );
     }
+
+    // Check if the connected account has ETH
+    const account = (
+      await window.ethereum.request({ method: "eth_accounts" })
+    )[0];
+    const balance = await window.ethereum.request({
+      method: "eth_getBalance",
+      params: [account, "latest"],
+    });
+
+    // Convert the balance from wei to Ether
+    const etherBalance = window.ethereum.utils.fromWei(balance, "ether");
+
+    // Check if the balance is greater than 0.05 ETH
+    if (parseFloat(etherBalance) < 0.05) {
+      throw new Error("Connected account has less than 0.05 ETH.");
+    }
   } catch (error) {
     console.error("Error switching to the Polygon Mumbai Testnet:", error);
     toast.error(

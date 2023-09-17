@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import abi from "../constants/abi.json";
 
 const contractABI = abi;
-const contractAddress = "0x76f181Bc2b6f9d26e55324dAC316DA7bb8803623";
+const contractAddress = "0x3D34aEA06e2f0D1cf0Dbf45F9ffAaD83051FF7a2";
 
 const isWeb3Enabled = !!window.ethereum;
 
