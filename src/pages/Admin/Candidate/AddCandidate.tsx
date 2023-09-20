@@ -17,6 +17,7 @@ const AddCandidate = () => {
   const [positionId, setPositionId] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
+  const [manifesto, setManifesto] = useState("");
 
   const fetchElections = async () => {
     const jwtToken = Cookies.get("jwtToken");
@@ -65,6 +66,7 @@ const AddCandidate = () => {
       const requestData = {
         name: userName,
         email: userEmail,
+        manifesto: manifesto,
         positionId,
       };
 
@@ -115,6 +117,7 @@ const AddCandidate = () => {
           toast.success("Candidate added successfully");
           setUserEmail("");
           setUserName("");
+          setManifesto("");
         })
         .catch((error) => {
           setIsLoading(false);
@@ -124,6 +127,7 @@ const AddCandidate = () => {
           );
           setUserEmail("");
           setUserName("");
+          setManifesto("");
         });
     } catch (error) {
       console.log(error);
@@ -167,6 +171,12 @@ const AddCandidate = () => {
             placeholder="Candidate Name"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
+            className="p-3 rounded-lg border-indigo-300 focus:ring focus:ring-indigo-500 focus:outline-none border-2 hover:border-1"
+          />
+          <textarea
+            placeholder="Manifesto"
+            value={manifesto}
+            onChange={(e) => setManifesto(e.target.value)}
             className="p-3 rounded-lg border-indigo-300 focus:ring focus:ring-indigo-500 focus:outline-none border-2 hover:border-1"
           />
 

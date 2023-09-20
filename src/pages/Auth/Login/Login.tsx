@@ -53,6 +53,11 @@ const Login = () => {
         navigate(`/otp/${email}`);
         return;
       }
+      if (error.response.data.error == "User is not validated") {
+        toast.error("user not validated, contact admin");
+        setIsLoading(false);
+        return;
+      }
       setIsLoading(false);
       toast.error("Login failed. Please check your credentials."); // Show error toast message
       console.error("Error during login:", error);

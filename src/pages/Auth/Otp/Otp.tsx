@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 import toast from "react-hot-toast"; // Import react-hot-toast
 import { BeatLoader } from "react-spinners";
 
@@ -25,26 +24,21 @@ const Otp = () => {
 
     try {
       const response = await axios.post(apiUrl, requestData);
-      const jwtToken = JSON.stringify(response.data.token);
-      const userData = JSON.stringify(response.data.user);
 
       console.log(response);
 
-      Cookies.set("jwtToken", jwtToken);
-      Cookies.set("userData", userData);
-
-      window.location.href = "/profile";
+      navigate("/login");
 
       toast.success("Otp successful!"); // Show success toast message
       setIsLoading(false);
     } catch (error: any) {
       if (error?.response?.data?.error == "User is not confirmed") {
         toast.error("email not confirmed");
-        navigate("/otp");
+
         return;
       }
       setIsLoading(false);
-      toast.error("Otp failed. Please check your credentials."); // Show error toast message
+      toast.error("Otp failed try again"); // Show error toast message
       console.error("Error during Otp:", error);
     }
   };

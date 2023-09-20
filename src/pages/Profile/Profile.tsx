@@ -7,13 +7,8 @@ const Profile = () => {
   const { user, jwtToken } = useUser();
   const navigate = useNavigate();
 
-  // console.log("user profilerr", user);
-
   useEffect(() => {
-    // Check if user data exists in context or cookies
     if (!jwtToken) {
-      // Cookies.remove("userData");
-      // Cookies.remove("jwtToken");
       navigate("/login");
     }
   }, [user]);
@@ -23,7 +18,7 @@ const Profile = () => {
       <main className="profile-page">
         <section className="relative py-16 bg-blueGray-200">
           <div className="container mx-auto px-4">
-            <div className="relative flex flex-col min-w-0 break-words bg-neutral-100 w-full mb-6 shadow-lg shadow-indigo-900 rounded-lg ">
+            <div className="relative md:w-2/3 mx-auto flex flex-col min-w-0 break-words bg-neutral-100  mb-6 shadow-lg shadow-indigo-900 rounded-lg ">
               <div className="px-6 mt-5">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -53,18 +48,7 @@ const Profile = () => {
                     <div className="flex flex-wrap justify-center">
                       <div className="w-full lg:w-8/12 md:px-4">
                         <p className="mb-4 md:text-lg md:leading-relaxed md:text-justify text-left text-blueGray-700">
-                          As a candidate for NACOSS President, my manifesto
-                          centers on empowering tomorrow's tech leaders through
-                          innovative learning opportunities, inclusive community
-                          building, impactful mentorship, strategic industry
-                          partnerships, and holistic skills development. I am
-                          dedicated to advocating for student interests,
-                          enhancing communication channels, promoting
-                          sustainability, celebrating diversity, and leading
-                          with accessible and responsive leadership, all aimed
-                          at creating a vibrant and united community that
-                          prepares its members to excel in the dynamic world of
-                          technology.
+                          {user?.manifesto}
                         </p>
                       </div>
                     </div>
@@ -73,27 +57,27 @@ const Profile = () => {
 
                 {user?.admin && (
                   <div className="text-center mt-4 mb-6 grid grid-cols-2 gap-4 w-full justify-center">
-                    <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
-                      <Link to={"/admin/addElection"} className="md:text-lg  ">
+                    <Link to={"/admin/addElection"} className="md:text-lg  ">
+                      <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
                         🗳 Create Election
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
 
-                    <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
-                      <Link to={"/admin/addPosition"} className="md:text-lg">
+                    <Link to={"/admin/addPosition"} className="md:text-lg">
+                      <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
                         👥 Add Position
-                      </Link>
-                    </div>
-                    <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
-                      <Link to={"/admin/allelection"} className="md:text-lg ">
+                      </div>
+                    </Link>
+                    <Link to={"/admin/allelection"} className="md:text-lg ">
+                      <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
                         🗣️ Add Candidate
-                      </Link>
-                    </div>
-                    <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
-                      <Link to={"/admin/users"} className="md:text-lg ">
+                      </div>
+                    </Link>
+                    <Link to={"/admin/users"} className="md:text-lg ">
+                      <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
                         🗣️ Validate User
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
                   </div>
                 )}
               </div>
