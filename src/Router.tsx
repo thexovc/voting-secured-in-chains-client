@@ -17,13 +17,15 @@ import Result from "./pages/Result/Result";
 import Settings from "./pages/Settings/Settings";
 import AddElection from "./pages/Admin/Election/AddElection";
 import AddPosition from "./pages/Admin/Position/AddPosition";
-import Users from "./pages/UsersLog/users";
+// import Users from "./pages/UsersLog/users";
 import AddCandidate from "./pages/Admin/Candidate/AddCandidate";
 import ElectionAdmin from "./pages/Admin/Election/ElectionAdmin";
 import ElectionUser from "./pages/User/Election/ElectionUser";
 import HomeOutlet from "./pages/Outlet/HomeOutlet";
 import ElectionOption from "./pages/User/Election/ElectionOption";
 import ElectionResult from "./pages/Result/ElectionResult";
+import Otp from "./pages/Auth/Otp/Otp";
+import Users from "./pages/Users/Users";
 
 function Router() {
   const router = createBrowserRouter(
@@ -35,6 +37,7 @@ function Router() {
             <Route path="*" element={<NoMatch />} />
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
+            <Route path="otp/:email" element={<Otp />} />
           </Route>
           <Route path="/" element={<UserOutlet />} errorElement={<ErrorPage />}>
             <Route path="campaign/:id" element={<Campaign />} />
@@ -49,7 +52,9 @@ function Router() {
             <Route path="admin/addPosition" element={<AddPosition />} />
             <Route path="admin/addCandidate" element={<AddCandidate />} />
             <Route path="admin/allelection" element={<ElectionAdmin />} />
-            <Route path="userdata" element={<Users />} />
+            <Route path="admin/allelection" element={<ElectionAdmin />} />
+            {/* <Route path="userdata" element={<Users />} /> */}
+            <Route path="admin/users" element={<Users />} />
           </Route>
         </Route>
       </>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast"; // Import react-hot-toast
@@ -9,6 +9,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   // // Read the value of the "jwtToken" cookie
   // const jwtToken = Cookies.get("jwtToken");
@@ -45,7 +47,12 @@ const Login = () => {
 
       toast.success("Login successful!"); // Show success toast message
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response.data.error == "User is not confirmed") {
+        toast.error("email not confirmed");
+        navigate(`/otp/${email}`);
+        return;
+      }
       setIsLoading(false);
       toast.error("Login failed. Please check your credentials."); // Show error toast message
       console.error("Error during login:", error);

@@ -1,0 +1,8 @@
+.log__bg__img {
+  position: absolute;
+  background: url("../../../assets/auth/red-black.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+}

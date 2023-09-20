@@ -72,7 +72,7 @@ const Profile = () => {
                 )}
 
                 {user?.admin && (
-                  <div className="text-center mt-4 mb-6 flex gap-4 w-full justify-center">
+                  <div className="text-center mt-4 mb-6 grid grid-cols-2 gap-4 w-full justify-center">
                     <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
                       <Link to={"/admin/addElection"} className="md:text-lg  ">
                         🗳 Create Election
@@ -87,6 +87,11 @@ const Profile = () => {
                     <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
                       <Link to={"/admin/allelection"} className="md:text-lg ">
                         🗣️ Add Candidate
+                      </Link>
+                    </div>
+                    <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                      <Link to={"/admin/users"} className="md:text-lg ">
+                        🗣️ Validate User
                       </Link>
                     </div>
                   </div>
