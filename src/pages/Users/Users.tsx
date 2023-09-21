@@ -2,8 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useQuery } from "react-query";
 import toast from "react-hot-toast"; // Import react-hot-toast
-import { useState } from "react";
-import { BeatLoader } from "react-spinners";
+// import { useState } from "react";
 
 const Users = () => {
   // console.log({ user });
@@ -23,7 +22,6 @@ const Users = () => {
     return response.data;
   };
 
-  const [isLoading, setIsLoading] = useState(false);
   const { data: allUsers } = useQuery("users", fetchUsers);
 
   console.log(allUsers);
@@ -35,7 +33,7 @@ const Users = () => {
 
   const handleValidation = async (userId: string) => {
     // toast.success("validating...");
-    setIsLoading(true);
+    // setIsLoading(true);
     const apiUrl = `${
       import.meta.env.VITE_API_URL
     }/admin/validateUser/${userId}`;
@@ -47,9 +45,9 @@ const Users = () => {
         toast.success("Validated!!");
       });
 
-      setIsLoading(false);
+      // setIsLoading(false);
     } catch (error: any) {
-      setIsLoading(false);
+      // setIsLoading(false);
       toast.error("Not validated"); // Show error toast message
       console.error("Error validating:", error);
     }
