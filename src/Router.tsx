@@ -26,6 +26,7 @@ import ElectionOption from "./pages/User/Election/ElectionOption";
 import ElectionResult from "./pages/Result/ElectionResult";
 import Otp from "./pages/Auth/Otp/Otp";
 import Users from "./pages/Users/Users";
+import UnValidate from "./pages/Users/UnValidate";
 
 function Router() {
   const router = createBrowserRouter(
@@ -55,6 +56,7 @@ function Router() {
             <Route path="admin/allelection" element={<ElectionAdmin />} />
             {/* <Route path="userdata" element={<Users />} /> */}
             <Route path="admin/users" element={<Users />} />
+            <Route path="admin/unvalidate" element={<UnValidate />} />
           </Route>
         </Route>
       </>

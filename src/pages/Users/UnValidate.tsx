@@ -4,13 +4,13 @@ import { useQuery } from "react-query";
 import toast from "react-hot-toast"; // Import react-hot-toast
 // import { useState } from "react";
 
-const Users = () => {
+const UnValidate = () => {
   // console.log({ user });
 
   const fetchUsers = async () => {
     const jwtToken = Cookies.get("jwtToken");
     const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/auth/users`,
+      `${import.meta.env.VITE_API_URL}/admin/validated-users`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -36,16 +36,17 @@ const Users = () => {
     // setIsLoading(true);
     const apiUrl = `${
       import.meta.env.VITE_API_URL
-    }/admin/validateUser/${userId}`;
+    }/admin/unvalidate-user/${userId}`;
 
     console.log(apiUrl);
 
     try {
       await axios.post(apiUrl).then(() => {
-        toast.success("Validated!!");
+        toast.success("Un Validated!!");
       });
 
       window.location.href = window.location.href;
+
       // setIsLoading(false);
     } catch (error: any) {
       // setIsLoading(false);
@@ -71,25 +72,17 @@ const Users = () => {
                   <div className="flex w-full justify-between items-center">
                     <div className="w-[60%]">
                       <h5 className="mb-2 text-lg font-semibold  text-gray-700 dark:text-white">
-                        {user.name} -{" "}
+                        {user.name}{" "}
                         <span className="font-thin"> {user.matNo}</span>
                       </h5>
                     </div>
-                    {user.validated ? (
-                      <button
-                        disabled
-                        className="p-3 cursor-not-allowed text-white font-normal bg-gray-300  rounded-lg"
-                      >
-                        validated
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleValidation(user?.id)}
-                        className="p-3 bg-indigo-700 text-white font-normal hover:bg-indigo-400 cursor-pointer rounded-lg"
-                      >
-                        validate
-                      </button>
-                    )}
+
+                    <button
+                      onClick={() => handleValidation(user?.id)}
+                      className="p-3 bg-red-600 text-white font-normal hover:bg-indigo-400 cursor-pointer rounded-lg"
+                    >
+                      unvalidate
+                    </button>
                   </div>
                 </div>
               )}
@@ -101,4 +94,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UnValidate;

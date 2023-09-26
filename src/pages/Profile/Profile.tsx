@@ -56,29 +56,37 @@ const Profile = () => {
                 )}
 
                 {user?.admin && (
-                  <div className="text-center mt-4 mb-6 grid grid-cols-2 gap-4 w-full justify-center">
-                    <Link to={"/admin/addElection"} className="md:text-lg  ">
-                      <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
-                        🗳 Create Election
-                      </div>
-                    </Link>
+                  <>
+                    {" "}
+                    <div className="text-center mt-4 mb-6 grid grid-cols-2 gap-4 w-full justify-center">
+                      <Link to={"/admin/addElection"} className="md:text-lg  ">
+                        <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                          🗳 Create Election
+                        </div>
+                      </Link>
 
-                    <Link to={"/admin/addPosition"} className="md:text-lg">
-                      <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
-                        👥 Add Position
+                      <Link to={"/admin/addPosition"} className="md:text-lg">
+                        <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                          👥 Add Position
+                        </div>
+                      </Link>
+                      <Link to={"/admin/allelection"} className="md:text-lg ">
+                        <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                          🗣️ Add Candidate
+                        </div>
+                      </Link>
+                      <Link to={"/admin/users"} className="md:text-lg ">
+                        <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                          🗣️ Validate User
+                        </div>
+                      </Link>
+                    </div>
+                    <Link to={"/admin/unvalidate"} className="md:text-lg  ">
+                      <div className="text-center mt-4 w-1/2 mx-auto  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
+                        🗣️ UnValidate User
                       </div>
                     </Link>
-                    <Link to={"/admin/allelection"} className="md:text-lg ">
-                      <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
-                        🗣️ Add Candidate
-                      </div>
-                    </Link>
-                    <Link to={"/admin/users"} className="md:text-lg ">
-                      <div className="text-center mt-4  bg-indigo-600 cursor-pointer hover:bg-indigo-900 p-2 text-white font-bold rounded-md leading-normal mb-2 text-blueGray-400">
-                        🗣️ Validate User
-                      </div>
-                    </Link>
-                  </div>
+                  </>
                 )}
               </div>
             </div>
