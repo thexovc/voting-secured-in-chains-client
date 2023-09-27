@@ -29,7 +29,7 @@ function App() {
     <>
       <FloatingWhatsApp
         accountName="Voting Secured By Chains"
-        phoneNumber="2348103312533"
+        phoneNumber="2348060826547"
       />
       <WagmiConfig config={wagmiConfig}>
         <UserProvider>
