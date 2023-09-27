@@ -62,6 +62,9 @@ const UnValidate = () => {
           className={`flex flex-col gap-2 items-center justify-between text-xl w-full md:w-2/3 px-3 cursor-pointer font-semibold  py-2 rounded-lg`}
         >
           <h1>ALL USERS</h1>
+
+          {allUsers && <h3>TOTAL USERS: {allUsers.length}</h3>}
+
           {allUsers.map((user: any, index: any) => (
             <>
               {user.name != "admin" && (
